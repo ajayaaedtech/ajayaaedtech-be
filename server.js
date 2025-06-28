@@ -13,6 +13,11 @@ app.use(cors());
 app.use(express.json());
 
 const formRoutes = require("./routes/formRoutes.js");
+// Home route
+app.get("/", (req, res) => {
+  res.send("Hello APIs");
+});
+
 app.use("/api/form", formRoutes);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
