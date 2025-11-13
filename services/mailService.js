@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 
 exports.sendMail = async (formData) => {
   const mailOptions = {
-    from: `"AjayaEdTech Contact" <${process.env.GMAIL_USER}>`,
+    from: `"mohan singh form api" <${process.env.GMAIL_USER}>`,
     to: "info@ajayaaedtech.com",
     subject: "New Inquiry from Website",
     html: `
