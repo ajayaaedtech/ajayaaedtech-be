@@ -27,6 +27,14 @@ app.get("/", (req, res) => {
   res.send("AYAYAAEDTECH Backend Running 🚀");
 });
 
+const uesrroutes = require("./routes/pofileedit/userRoutes.js");
+// edit and profiles
+app.use("/api/user", uesrroutes)
+// call back
+const callbackrequest = require("./routes/customerSupportRoutes/customerSupportRoutes.js");
+app.use("/api/callback", callbackrequest)
+
+
 app.use("/api/form", formRoutes);
 
 // Routes
