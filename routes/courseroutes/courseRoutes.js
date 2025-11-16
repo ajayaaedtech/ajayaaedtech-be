@@ -10,7 +10,7 @@ const {
 
 router.post("/create", createCourse);
 router.put("/update/:courseId", updateCourse);
-router.get("/names", getAllCourseNames);
+router.get("/names" ,getAllCourseNames);
 router.post("/assign-trial", assignTrialCourse);
 router.get("/details/:courseId", getCourseDetails);
 router.post("/my-courses", getMyCourses);

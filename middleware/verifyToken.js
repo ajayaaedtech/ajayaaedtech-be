@@ -1,17 +1,21 @@
+
+const SECRET = "ajayaaedtecheducation2025";
 const jwt = require("jsonwebtoken");
-const SECRET = "MONU_BANNA_TEST_SECRET";
 
 module.exports = (req, res, next) => {
-  const token = req.query.token;
-
-  if (!token)
-    return res.status(401).json({ message: "Token required" });
-
   try {
-    const payload = jwt.verify(token, SECRET);
-    req.tokenPayload = payload;
+    const header = req.headers.authorization;
+
+    if (!header || !header.startsWith("Bearer ")) {
+      return res.status(401).json({ message: "Token missing" });
+    }
+
+    const token = header.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    req.user = decoded;
     next();
   } catch (err) {
-    return res.status(403).json({ message: "Invalid token" });
+    return res.status(401).json({ message: "Invalid or expired token" });
   }
 };

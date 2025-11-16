@@ -7,7 +7,7 @@ const swaggerSpec = require('./swagger/swagger.js'); // import swagger config
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes.js") ;
 const courseRoutes = require("./routes/courseroutes/courseRoutes.js");
-
+// Apply Auth Middleware AFTER public routes
 
 dotenv.config();
 const app = express();
@@ -30,14 +30,11 @@ app.get("/", (req, res) => {
 const uesrroutes = require("./routes/pofileedit/userRoutes.js");
 // edit and profiles
 app.use("/api/user", uesrroutes)
+
 // call back
 const callbackrequest = require("./routes/customerSupportRoutes/customerSupportRoutes.js");
 app.use("/api/callback", callbackrequest)
-
-
 app.use("/api/form", formRoutes);
-
-// Routes
 app.use("/api/auth", authRoutes);
 
 //for courses
@@ -50,6 +47,15 @@ app.use("/api/video", require("./routes/videoRoutes"));
 
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+
+// ********************only admin codes*****************************
+const adminRoutes = require("./routes/adminRoutes/user/adminUserRoutes.js");
+const admincourseroutes = require("./routes/adminRoutes/courses/adminCoursesRoutes.js")
+app.use("/api/admin", adminRoutes);
+app.use("/api/admin/courses", admincourseroutes);
+
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
