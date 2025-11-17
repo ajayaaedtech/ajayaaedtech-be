@@ -8,20 +8,15 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes.js") ;
 const courseRoutes = require("./routes/courseroutes/courseRoutes.js");
 // Apply Auth Middleware AFTER public routes
-
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 5001;
-
 // DB connection
 connectDB();
 // Middleware
 app.use(cors());
 app.use(express.json());
-
 const formRoutes = require("./routes/formRoutes.js");
-
-
 // Home route
 app.get("/", (req, res) => {
   res.send("AYAYAAEDTECH Backend Running 🚀");
@@ -30,32 +25,21 @@ app.get("/", (req, res) => {
 const uesrroutes = require("./routes/pofileedit/userRoutes.js");
 // edit and profiles
 app.use("/api/user", uesrroutes)
-
 // call back
 const callbackrequest = require("./routes/customerSupportRoutes/customerSupportRoutes.js");
 app.use("/api/callback", callbackrequest)
 app.use("/api/form", formRoutes);
 app.use("/api/auth", authRoutes);
-
 //for courses
 app.use("/api/course", courseRoutes);
-
 // video plyer api
 app.use("/api/video", require("./routes/videoRoutes"));
-
-
-
-
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-
 // ********************only admin codes*****************************
 const adminRoutes = require("./routes/adminRoutes/user/adminUserRoutes.js");
 const admincourseroutes = require("./routes/adminRoutes/courses/adminCoursesRoutes.js")
 app.use("/api/admin", adminRoutes);
 app.use("/api/admin/courses", admincourseroutes);
-
-
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

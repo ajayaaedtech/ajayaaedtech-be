@@ -11,6 +11,8 @@ const getPaginatedUsers = require("../../../controllers/adminController/user/get
 const registerAdmin = require("../../../controllers/adminController/user/registerAdmin");
 const loginAdmin = require("../../../controllers/adminController/user/loginAdmin");
 const verifyAdminAuth = require("../../../middleware/verifyAdminAuth");
+const searchUser = require("../../../controllers/adminController/user/searchUser");
+const editFullUser = require("../../../controllers/adminController/user/editFullUser");
 
 
 // ALL ADMIN ROUTES → token + admin guard
@@ -20,8 +22,8 @@ router.patch("/user-role/:userId", verifyAdminAuth, updateRole);
 router.patch("/user-status/:userId", verifyAdminAuth,  updateStatus);
 router.patch("/user-edit/:userId", verifyAdminAuth, updateProfileFields);
 router.get("/users", verifyAdminAuth, getPaginatedUsers);
+router.post("/user-search", verifyAdminAuth, searchUser);
 
-const editFullUser = require("../../../controllers/adminController/user/editFullUser");
 
 router.patch("/user-edit-full/:userId", verifyAdminAuth, editFullUser);
 

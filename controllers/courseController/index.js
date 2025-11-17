@@ -5,5 +5,5 @@ module.exports = {
   assignTrialCourse: require("./assignTrialCourse"),
   getCourseDetails: require("./getCourseDetails"),
   getMyCourses: require("./getMyCourses"),
-
+  deassignCourse: require("./deassignCourse"),
 };
